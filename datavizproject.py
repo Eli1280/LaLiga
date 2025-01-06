@@ -149,7 +149,7 @@ elif page == "Player Statistics":
         fig_radar = go.Figure()
 
         for player in selected_players:
-            player_data = filtered_stats[filtered_stats['Player'] == player].iloc[0]
+            player_data = player_stats_df[player_stats_df['Player'] == player].iloc[0]
             fig_radar.add_trace(go.Scatterpolar(
                 r=[player_data[stat] for stat in radar_categories],
                 theta=radar_categories,
