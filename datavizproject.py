@@ -25,7 +25,7 @@ accurate_passes_df.columns = ['Rank', 'Player', 'Team', 'Pass Success (%)', 'Tot
 big_chances_created_df.columns = ['Rank', 'Player', 'Team', 'Big Chances Created', 'Goals', 'Minutes', 'Matches', 'Country']
 interceptions_df.columns = ['Rank', 'Player', 'Team', 'Goals', 'Interceptions', 'Matches', 'Minutes', 'Country']
 contests_won_df.columns = ['Rank', 'Player', 'Team', 'Goals', 'Dribble Success Rate (%)',  'Minutes', 'Matches', 'Country']
-player_goals_df.columns = ['Rank', 'Player', 'Team', 'Goals', 'Total Goals', 'Matches', 'Country']
+player_goals_df.columns = ['Rank', 'Player', 'Team', 'Goals', 'Total Goals', 'Minutes', 'Matches', 'Country']
 
 # Sélectionner uniquement les colonnes nécessaires pour chaque fichier
 player_goals_df = player_goals_df[['Player', 'Total Goals']]
