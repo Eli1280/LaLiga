@@ -15,22 +15,22 @@ team_tackles_df = pd.read_csv('won_tackle_team.csv', sep=',')
 player_goals_df = pd.read_csv('player_goals_per_90.csv', sep=',')
 
 # Load additional player stats for radar chart
-accurate_passes_df = pd.read_csv('data/player_accurate_passes.csv')
-big_chances_created_df = pd.read_csv('data/player_big_chances_created.csv')
-interceptions_df = pd.read_csv('data/player_interceptions.csv')
-contests_won_df = pd.read_csv('data/player_contests_won.csv')
+accurate_passes_df = pd.read_csv('data/player_accurate_passes.csv',sep=',')
+big_chances_created_df = pd.read_csv('data/player_big_chances_created.csv',sep=',')
+interceptions_df = pd.read_csv('data/player_interceptions.csv',sep=',')
+contests_won_df = pd.read_csv('data/player_contests_won.csv',sep=',')
 
 # Renommer les colonnes si nécessaire et sélectionner les données importantes
-accurate_passes_df.columns = ['Rank', 'Player', 'Team', 'Accurate Passes', 'Total Passes', 'Minutes', 'Matches', 'Country']
+accurate_passes_df.columns = ['Rank', 'Player', 'Team', 'Pass Success (%)', 'Total Passes', 'Minutes', 'Matches', 'Country']
 big_chances_created_df.columns = ['Rank', 'Player', 'Team', 'Big Chances Created', 'Goals', 'Minutes', 'Matches', 'Country']
 interceptions_df.columns = ['Rank', 'Player', 'Team', 'Interceptions', 'Goals', 'Minutes', 'Matches', 'Country']
-contests_won_df.columns = ['Rank', 'Player', 'Team', 'Contests Won', 'Goals', 'Minutes', 'Matches', 'Country']
+contests_won_df.columns = ['Rank', 'Player', 'Team', 'Dribble Success Rate (%)', 'Goals', 'Minutes', 'Matches', 'Country']
 
 # Sélectionner uniquement les colonnes nécessaires pour chaque fichier
-accurate_passes_df = accurate_passes_df[['Player', 'Accurate Passes']]
+accurate_passes_df = accurate_passes_df[['Player', 'Pass Success (%)']]
 big_chances_created_df = big_chances_created_df[['Player', 'Big Chances Created']]
 interceptions_df = interceptions_df[['Player', 'Interceptions']]
-contests_won_df = contests_won_df[['Player', 'Contests Won']]
+contests_won_df = contests_won_df[['Player', 'Dribble Success Rate (%)']]
 
 # Fusionner les DataFrames sur la colonne 'Player'
 player_stats_df = accurate_passes_df.merge(big_chances_created_df, on='Player', how='left')
