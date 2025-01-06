@@ -104,10 +104,10 @@ elif page == "Player Statistics":
 
         # Define the categories for the radar chart based on imported CSVs
         radar_categories = [
-            'Accurate Passes',  # From player_accurate_passes.csv
+            'Pass Success (%)',  # From player_accurate_passes.csv
             'Big Chances Created',  # From player_big_chances_created.csv
             'Interceptions',  # From player_interceptions.csv
-            'Contests Won'  # From player_contests_won.csv
+            'Dribble Success Rate (%)'  # From player_contests_won.csv
         ]
 
         # Create the radar chart
