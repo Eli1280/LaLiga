@@ -3,6 +3,7 @@ import streamlit as st
 import pandas as pd
 import plotly.graph_objects as go
 from dataframes import load_dataframes
+import os
 
 folder_path = 'data/'
 csv_files = [file for file in os.listdir(folder_path) if file.endswith('.csv')]
