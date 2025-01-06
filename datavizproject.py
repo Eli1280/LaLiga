@@ -12,13 +12,14 @@ import pandas as pd
 
 
 # Load the CSV files
-home_table_df = pd.read_csv('/mnt/data/Laliga_table_home_2023_24.csv')
-away_table_df = pd.read_csv('/mnt/data/Laliga_table_away_2023_24.csv')
-overall_table_df = pd.read_csv('/mnt/data/Laliga_table_2023_24.csv')
-team_goals_df = pd.read_csv('/mnt/data/team_goals_per_match.csv')
-team_ratings_df = pd.read_csv('/mnt/data/team_ratings.csv')
-team_tackles_df = pd.read_csv('/mnt/data/won_tackle_team.csv')
-player_goals_df = pd.read_csv('/mnt/data/player_goals_per_90.csv')
+home_table_df = pd.read_csv('Laliga_table_home_2023_24.csv')
+away_table_df = pd.read_csv('Laliga_table_away_2023_24.csv')
+overall_table_df = pd.read_csv('Laliga_table_2023_24.csv')
+team_goals_df = pd.read_csv('team_goals_per_match.csv')
+team_ratings_df = pd.read_csv('team_ratings.csv')
+team_tackles_df = pd.read_csv('won_tackle_team.csv')
+player_goals_df = pd.read_csv('player_goals_per_90.csv')
+
 
 # Streamlit app
 st.title("LaLiga Dashboard 2023/24")
