@@ -5,8 +5,6 @@ import plotly.graph_objects as go
 from dataframes import load_dataframes
 import os
 
-
-
 # Load the CSV files
 home_table_df = pd.read_csv('Laliga_table_home_2023_24.csv')
 away_table_df = pd.read_csv('Laliga_table_away_2023_24.csv')
@@ -16,6 +14,16 @@ team_ratings_df = pd.read_csv('team_ratings.csv')
 team_tackles_df = pd.read_csv('won_tackle_team.csv')
 player_goals_df = pd.read_csv('player_goals_per_90.csv')
 
+# Load additional player stats for radar chart
+accurate_passes_df = pd.read_csv('data/player_accurate_passes.csv')
+big_chances_created_df = pd.read_csv('player_big_chances_created.csv')
+interceptions_df = pd.read_csv('data/player_interceptions.csv')
+contests_won_df = pd.read_csv('data/player_contests_won.csv')
+
+# Merge all player data into a single DataFrame
+player_stats_df = accurate_passes_df.merge(big_chances_created_df, on='Player', how='left')
+player_stats_df = player_stats_df.merge(interceptions_df, on='Player', how='left')
+player_stats_df = player_stats_df.merge(contests_won_df, on='Player', how='left')
 
 # Streamlit app
 st.title("LaLiga Dashboard 2023/24")
@@ -71,15 +79,45 @@ elif page == "Player Statistics":
     # Select players to compare
     selected_players = st.multiselect(
         "Select players to compare:",
-        options=player_goals_df['Player'].unique(),
-        default=player_goals_df['Player'].unique()[:2]  # Pre-select the first two players
+        options=player_stats_df['Player'].unique(),
+        default=player_stats_df['Player'].unique()[:2]  # Pre-select the first two players
     )
 
     if selected_players:
-        filtered_df = player_goals_df[player_goals_df['Player'].isin(selected_players)]
-        fig_players = px.bar(filtered_df, x='Player', y='Goals per 90',
-                             title='Goals Per 90 Minutes Comparison',
-                             labels={'Goals per 90': 'Goals per 90 Minutes', 'Player': 'Player'})
-        st.plotly_chart(fig_players)
+        # Filter data for selected players
+        filtered_stats = player_stats_df[player_stats_df['Player'].isin(selected_players)]
+
+        # Radar chart for detailed comparison
+        st.subheader("Radar Chart Comparison")
+
+        # Define the categories for the radar chart based on imported CSVs
+        radar_categories = [
+            'Accurate Passes',  # From player_accurate_passes.csv
+            'Big Chances Created',  # From player_big_chances_created.csv
+            'Interceptions',  # From player_interceptions.csv
+            'Contests Won'  # From player_contests_won.csv
+        ]
+
+        # Create the radar chart
+        fig_radar = go.Figure()
+
+        for player in selected_players:
+            player_data = filtered_stats[filtered_stats['Player'] == player].iloc[0]
+            fig_radar.add_trace(go.Scatterpolar(
+                r=[player_data[stat] for stat in radar_categories],
+                theta=radar_categories,
+                fill='toself',
+                name=player
+            ))
+
+        fig_radar.update_layout(
+            polar=dict(
+                radialaxis=dict(visible=True, range=[0, max(filtered_stats[radar_categories].max())])  # Dynamic range
+            ),
+            showlegend=True
+        )
+
+        st.plotly_chart(fig_radar)
+
     else:
         st.write("Select players to see their comparison.")
