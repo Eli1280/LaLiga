@@ -114,7 +114,7 @@ elif page == "Player Statistics":
             'Pass Success (%)',  # From player_accurate_passes.csv
             'Big Chances Created',  # From player_big_chances_created.csv
             'Interceptions',  # From player_interceptions.csv
-            'Dribble Success Rate (%)'  # From player_contests_won.csv
+            'Dribble Success Rate (%)',  # From player_contests_won.csv
             'Total Goals'
         ]
 
