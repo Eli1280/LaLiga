@@ -31,18 +31,15 @@ page = st.sidebar.radio("Go to", ["Overview", "Team Statistics", "Player Statist
 # Page: Overview
 if page == "Overview":
     st.header("Overview of LaLiga 2023/24")
-    st.write("Comparison of Home, Away, and Overall Performance")
+    st.write("Comparison of Home and Away Performance")
 
     home_table_df['location'] = 'Home'
     away_table_df['location'] = 'Away'
-    overall_table_df['location'] = 'Overall'
 
     combined_df = pd.concat([
         home_table_df[['name', 'pts', 'wins', 'draws', 'losses', 'goalConDiff', 'location']],
-        away_table_df[['name', 'pts', 'wins', 'draws', 'losses', 'goalConDiff', 'location']],
-        overall_table_df[['name', 'pts', 'wins', 'draws', 'losses', 'goalConDiff', 'location']]
+        away_table_df[['name', 'pts', 'wins', 'draws', 'losses', 'goalConDiff', 'location']]
     ])
-    st.write(combined_df.columns)
 
     fig = px.bar(combined_df, x='name', y='pts', color='location',
                  title='Points Comparison: Home vs Away vs Overall',
