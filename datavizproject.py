@@ -111,9 +111,12 @@ elif page == "Player Statistics":
         ]
 
 
-        # Calculer les valeurs maximales et minimales pour chaque catégorie
-        min_values = filtered_stats[radar_categories].min()
-        max_values = filtered_stats[radar_categories].max()
+        scales = {
+            'Pass Success (%)': [0, 100],  # Pourcentage, donc de 0 à 100
+            'Big Chances Created': [0, filtered_stats['Big Chances Created'].max() + 1],
+            'Interceptions': [0, filtered_stats['Interceptions'].max() + 1],
+            'Dribble Success Rate (%)': [0, 100]
+        }
 
         # Créer le radar chart
         fig_radar = go.Figure()
@@ -127,20 +130,32 @@ elif page == "Player Statistics":
                 name=player
             ))
 
-        # Mettre à jour la mise en page du graphique radar avec une échelle dynamique
+        # Mettre à jour la mise en page du graphique radar avec des axes radiaux distincts
         fig_radar.update_layout(
             polar=dict(
                 radialaxis=dict(
                     visible=True,
-                    range=[min_values.min(), max_values.max()]  # Plage dynamique en fonction des données
-                )
+                    range=[scales[radar_categories[0]][0], scales[radar_categories[0]][1]],
+                ),
+                angularaxis=dict(
+                    tickmode='array',
+                    tickvals=[0, 90, 180, 270],  # Répartition des axes
+                    ticktext=radar_categories,
+                ),
             ),
             showlegend=True
         )
 
+        # Mise à jour de chaque axe radial
+        for idx, category in enumerate(radar_categories):
+            fig_radar.update_layout(
+                polar=dict(
+                    radialaxis=dict(
+                        range=scales[category]
+                    )
+                )
+            )
         # Afficher le graphique radar dans Streamlit
         st.plotly_chart(fig_radar)
-
-
     else:
         st.write("Select players to see their comparison.")
