@@ -118,9 +118,9 @@ elif page == "Player Statistics":
         return standardized_column
 
 # Appliquer cette transformation à chaque colonne
-            columns_to_standardize = ['Pass Success (%)', 'Big Chances Created', 'Interceptions', 'Dribble Success Rate (%)', 'Total Goals']
+        columns_to_standardize = ['Pass Success (%)', 'Big Chances Created', 'Interceptions', 'Dribble Success Rate (%)', 'Total Goals']
 
-            for col in columns_to_standardize:
+        for col in columns_to_standardize:
                 player_stats_df[col] = standardize_column(player_stats_df[col])
         
 
