@@ -57,17 +57,17 @@ elif page == "Team Statistics":
 
     # Goals per match
     st.subheader("Goals Per Match")
-    fig_goals = px.bar(team_goals_df, x='Team', y='goals_per_match', title='Goals per Match by Team')
+    fig_goals = px.bar(team_goals_df, x='Team', y='Goals Per Match', title='Goals per Match by Team')
     st.plotly_chart(fig_goals)
 
     # Team ratings
     st.subheader("Team Ratings")
-    fig_ratings = px.bar(team_ratings_df, x='Team', y='rating', title='Team Ratings')
+    fig_ratings = px.bar(team_ratings_df, x='Team', y='Rating', title='Team Ratings')
     st.plotly_chart(fig_ratings)
 
     # Tackles won
     st.subheader("Tackles Won")
-    fig_tackles = px.bar(team_tackles_df, x='Team', y='tackles_won', title='Tackles Won by Team')
+    fig_tackles = px.bar(team_tackles_df, x='Team', y='Successful Tackles per Match', title='Tackles Won by Team')
     st.plotly_chart(fig_tackles)
 
 # Page: Player Statistics
@@ -84,9 +84,9 @@ elif page == "Player Statistics":
 
     if selected_players:
         filtered_df = player_goals_df[player_goals_df['Player'].isin(selected_players)]
-        fig_players = px.bar(filtered_df, x='player', y='goals_per_90',
+        fig_players = px.bar(filtered_df, x='Player', y='Goals per 90',
                              title='Goals Per 90 Minutes Comparison',
-                             labels={'goals_per_90': 'Goals per 90 Minutes', 'Player': 'Player'})
+                             labels={'Goals per 90': 'Goals per 90 Minutes', 'Player': 'Player'})
         st.plotly_chart(fig_players)
     else:
         st.write("Select players to see their comparison.")
