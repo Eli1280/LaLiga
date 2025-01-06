@@ -62,7 +62,7 @@ elif page == "Team Statistics":
 
     # Team ratings
     st.subheader("Team Ratings")
-    fig_ratings = px.bar(team_ratings_df, x='Team', y='Rating', title='Team Ratings')
+    fig_ratings = px.bar(team_ratings_df, x='Team', y='FotMob Team Rating', title='Team Ratings')
     st.plotly_chart(fig_ratings)
 
     # Tackles won
