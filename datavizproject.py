@@ -110,7 +110,12 @@ elif page == "Player Statistics":
             'Dribble Success Rate (%)'  # From player_contests_won.csv
         ]
 
-        # Create the radar chart
+
+        # Calculer les valeurs maximales et minimales pour chaque catégorie
+        min_values = filtered_stats[radar_categories].min()
+        max_values = filtered_stats[radar_categories].max()
+
+        # Créer le radar chart
         fig_radar = go.Figure()
 
         for player in selected_players:
@@ -122,14 +127,21 @@ elif page == "Player Statistics":
                 name=player
             ))
 
+        # Mettre à jour la mise en page du graphique radar avec une échelle dynamique
         fig_radar.update_layout(
             polar=dict(
-                radialaxis=dict(visible=True, range=[0, max(filtered_stats[radar_categories].max())])  # Dynamic range
+                radialaxis=dict(
+                    visible=True,
+                    range=[min_values.min(), max_values.max()]  # Plage dynamique en fonction des données
+                )
             ),
             showlegend=True
         )
 
+        # Afficher le graphique radar dans Streamlit
         st.plotly_chart(fig_radar)
 
+    else:
+        st.write("Please select players to compare.")
     else:
         st.write("Select players to see their comparison.")
