@@ -104,7 +104,7 @@ elif page == "Player Statistics":
         filtered_stats = player_stats_df[player_stats_df['Player'].isin(selected_players)]
         st.subheader("Player Statistics Table")
         player_stats_display = filtered_stats[['Player', 'Pass Success (%)', 'Big Chances Created', 'Interceptions', 'Dribble Success Rate (%)','Total Goals']].reset_index(drop=True)
-        st.dataframe(player_stats_display.style.hide_index())
+        st.dataframe(player_stats_display)
 
         # Radar chart for detailed comparison
         st.subheader("Radar Chart Comparison")
