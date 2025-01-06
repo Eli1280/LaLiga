@@ -33,9 +33,9 @@ interceptions_df = interceptions_df[['Player', 'Interceptions']]
 contests_won_df = contests_won_df[['Player', 'Dribble Success Rate (%)']]
 
 # Fusionner les DataFrames sur la colonne 'Player'
-player_stats_df = accurate_passes_df.merge(big_chances_created_df, on='Player', how='left')
-player_stats_df = player_stats_df.merge(interceptions_df, on='Player', how='left')
-player_stats_df = player_stats_df.merge(contests_won_df, on='Player', how='left')
+player_stats_df = accurate_passes_df.merge(big_chances_created_df, on='Player', how='right')
+player_stats_df = player_stats_df.merge(interceptions_df, on='Player', how='right')
+player_stats_df = player_stats_df.merge(contests_won_df, on='Player', how='right')
 
 # Streamlit app
 st.title("LaLiga Dashboard 2023/24")
