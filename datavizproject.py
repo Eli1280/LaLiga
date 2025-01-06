@@ -24,7 +24,7 @@ contests_won_df = pd.read_csv('data/player_contests_won.csv')
 accurate_passes_df.columns = ['Rank', 'Player', 'Team', 'Pass Success (%)', 'Total Passes', 'Minutes', 'Matches', 'Country']
 big_chances_created_df.columns = ['Rank', 'Player', 'Team', 'Chances Created', 'Goals', 'Minutes', 'Matches', 'Country']
 interceptions_df.columns = ['Rank', 'Player', 'Team', 'Goals', 'Interceptions', 'Matches', 'Minutes', 'Country']
-contests_won_df.columns = ['Rank', 'Player', 'Team', 'Goals', 'Dribble Success Rate (%)',  'Minutes', 'Matches', 'Country']
+contests_won_df.columns = ['Rank', 'Player', 'Team', 'Goals', 'Dribble Success(%)',  'Minutes', 'Matches', 'Country']
 player_goals_df.columns = ['Rank', 'Player', 'Team', 'Goals', 'Total Goals', 'Minutes', 'Matches', 'Country']
 
 # Sélectionner uniquement les colonnes nécessaires pour chaque fichier
@@ -32,7 +32,7 @@ player_goals_df = player_goals_df[['Player', 'Total Goals']]
 accurate_passes_df = accurate_passes_df[['Player', 'Pass Success (%)']]
 big_chances_created_df = big_chances_created_df[['Player', 'Chances Created']]
 interceptions_df = interceptions_df[['Player', 'Interceptions']]
-contests_won_df = contests_won_df[['Player', 'Dribble Success Rate (%)']]
+contests_won_df = contests_won_df[['Player', 'Dribble Success(%)']]
 
 # Fusionner les DataFrames sur la colonne 'Player'
 player_stats_df = accurate_passes_df.merge(big_chances_created_df, on='Player', how='right')
@@ -103,7 +103,7 @@ elif page == "Player Statistics":
         # Filter data for selected players
         filtered_stats = player_stats_df[player_stats_df['Player'].isin(selected_players)]
         st.subheader("Player Statistics Table")
-        player_stats_display = filtered_stats[['Player', 'Pass Success (%)', 'Chances Created', 'Interceptions', 'Dribble Success Rate (%)','Total Goals']].reset_index(drop=True)
+        player_stats_display = filtered_stats[['Player', 'Pass Success (%)', 'Chances Created', 'Interceptions', 'Dribble Success(%)','Total Goals']].reset_index(drop=True)
         st.dataframe(player_stats_display.reset_index(drop=True),use_container_width=True)
 
         # Radar chart for detailed comparison
@@ -114,7 +114,7 @@ elif page == "Player Statistics":
             'Pass Success (%)',  # From player_accurate_passes.csv
             'Chances Created',  # From player_big_chances_created.csv
             'Interceptions',  # From player_interceptions.csv
-            'Dribble Success Rate (%)',  # From player_contests_won.csv
+            'Dribble Success(%)',  # From player_contests_won.csv
             'Total Goals'
         ]
 
