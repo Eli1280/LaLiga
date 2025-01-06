@@ -42,6 +42,7 @@ if page == "Overview":
         away_table_df[['name', 'pts', 'wins', 'draws', 'losses', 'goalConDiff', 'location']],
         overall_table_df[['name', 'pts', 'wins', 'draws', 'losses', 'goalConDiff', 'location']]
     ])
+    st.write(combined_df.columns)
 
     fig = px.bar(combined_df, x='name', y='pts', color='location',
                  title='Points Comparison: Home vs Away vs Overall',
