@@ -107,22 +107,25 @@ elif page == "Player Statistics":
         st.dataframe(player_stats_display.reset_index(drop=True),use_container_width=True)
         def standardize_column(column, min_val=20, max_val=80):
     # Calcul de la plage de la colonne (valeurs max et min)
-    col_min = column.min()
-    col_max = column.max()
+        col_max = column.max()
+        col_min = column.min()
     
     # Transformation linéaire pour normaliser entre 0 et 1
-    normalized_column = (column - col_min) / (col_max - col_min)
+        normalized_column = (column - col_min) / (col_max - col_min)
     
     # Re-mappage entre min_val et max_val
-    standardized_column = normalized_column * (max_val - min_val) + min_val
-    return standardized_column
+        standardized_column = normalized_column * (max_val - min_val) + min_val
+        return standardized_column
 
 # Appliquer cette transformation à chaque colonne
-columns_to_standardize = ['Pass Success (%)', 'Big Chances Created', 'Interceptions', 'Dribble Success Rate (%)', 'Total Goals']
+        columns_to_standardize = ['Pass Success (%)', 'Big Chances Created', 'Interceptions', 'Dribble Success Rate (%)', 'Total Goals']
 
-for col in columns_to_standardize:
-    player_stats_df[col] = standardize_column(player_stats_df[col])
-        # Radar chart for detailed comparison
+        for col in columns_to_standardize:
+            player_stats_df[col] = standardize_column(player_stats_df[col])
+        
+
+    # Radar chart for detailed comparison
+        
         st.subheader("Radar Chart Comparison")
 
         # Define the categories for the radar chart based on imported CSVs
