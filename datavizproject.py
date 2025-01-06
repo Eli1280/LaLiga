@@ -57,7 +57,7 @@ elif page == "Team Statistics":
 
     # Goals per match
     st.subheader("Goals Per Match")
-    fig_goals = px.bar(team_goals_df, x='Team', y='Goals Per Match', title='Goals per Match by Team')
+    fig_goals = px.bar(team_goals_df, x='Team', y='Goals per Match', title='Goals per Match by Team')
     st.plotly_chart(fig_goals)
 
     # Team ratings
