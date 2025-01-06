@@ -23,7 +23,7 @@ contests_won_df = pd.read_csv('data/player_contests_won.csv')
 # Renommer les colonnes si nécessaire et sélectionner les données importantes
 accurate_passes_df.columns = ['Rank', 'Player', 'Team', 'Pass Success (%)', 'Total Passes', 'Minutes', 'Matches', 'Country']
 big_chances_created_df.columns = ['Rank', 'Player', 'Team', 'Big Chances Created', 'Goals', 'Minutes', 'Matches', 'Country']
-interceptions_df.columns = ['Rank', 'Player', 'Team','Goals', 'Interceptions', 'Matches', 'Country']
+interceptions_df.columns = ['Rank', 'Player', 'Team', 'Goals', 'Interceptions', 'Matches', 'Country']
 contests_won_df.columns = ['Rank', 'Player', 'Team', 'Goals', 'Dribble Success Rate (%)',  'Minutes', 'Matches', 'Country']
 player_goals_df.columns = ['Rank', 'Player', 'Team', 'Goals', 'Total Goals', 'Matches', 'Country']
 
