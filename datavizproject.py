@@ -4,39 +4,21 @@ import pandas as pd
 import plotly.graph_objects as go
 from dataframes import load_dataframes
 
-# Charger les DataFrames
-dataframes = load_dataframes([
-    'player_goals_per_90.csv',
-    'player_interceptions.csv',
-    'player_on_target_scoring_attempts.csv',
-    'player_outfielder_blocks.csv',
-    'player_penalties_conceded.csv',
-    'player_penalties_won.csv',
-    'player_player_ratings.csv',
-    'player_possessions_won_attacking_third.csv',
-    'player_red_cards.csv',
-    'player_saves_made.csv',
-    'player_tackles_won.csv',
-    'player_top_assists.csv',
-    'player_top_scorers.csv',
-    'player_total_assists_in_attack.csv',
-    'player_total_scoring_attempts.csv',
-    'player_yellow_cards.csv',
-    'player_accurate_long_balls.csv',
-    'player_accurate_passes.csv',
-    'player_big_chances_created.csv',
-    'player_big_chances_missed.csv',
-    'player_clean_sheets.csv',
-    'player_contests_won.csv',
-    'player_effective_clearances.csv',
-    'player_expected_assists.csv',
-    'player_expected_assists_per_90.csv',
-    'player_expected_goals.csv',
-    'player_expected_goals_on_target.csv',
-    'player_expected_goals_per_90.csv',
-    'player_fouls_committed.csv',
-    'player_goals_conceded.csv'
-])
+folder_path = 'data/'
+csv_files = [file for file in os.listdir(folder_path) if file.endswith('.csv')]
+
+# Charger les CSV et les filtrer pour ceux contenant 'player' dans le nom
+player_csvs = []
+for file in csv_files:
+    if 'player' in file.lower():  # Filtre par nom de fichier
+        df = pd.read_csv(os.path.join(folder_path, file))
+        player_csvs.append(df)
+
+# Fusionner les DataFrames des joueurs
+merged_player_df = pd.concat(player_csvs, axis=0, ignore_index=True)
+
+# Afficher la première colonne du DataFrame fusionné
+st.write(merged_player_df.iloc[:, 0])
 
 # Streamlit app
 st.title("LaLiga Dashboard 2023/24")
