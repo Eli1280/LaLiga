@@ -115,7 +115,7 @@ elif page == "Player Statistics":
     
     # Re-mappage entre min_val et max_val
             standardized_column = normalized_column * (max_val - min_val) + min_val
-        return standardized_column
+            return standardized_column
 
 # Appliquer cette transformation à chaque colonne
         columns_to_standardize = ['Pass Success (%)', 'Big Chances Created', 'Interceptions', 'Dribble Success Rate (%)', 'Total Goals']
