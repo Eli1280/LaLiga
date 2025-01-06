@@ -9,7 +9,7 @@ import os
 home_table_df = pd.read_csv('Laliga_table_home_2023_24.csv')
 away_table_df = pd.read_csv('Laliga_table_away_2023_24.csv')
 overall_table_df = pd.read_csv('Laliga_table_2023_24.csv')
-team_goals_df = pd.read_csv('team_goals_per_match.csv')
+team_goals_df = pd.read_csv('data/team_goals_per_match.csv')
 team_ratings_df = pd.read_csv('team_ratings.csv')
 team_tackles_df = pd.read_csv('won_tackle_team.csv', sep=',')
 player_goals_df = pd.read_csv('player_goals_per_90.csv', sep=',')
@@ -27,6 +27,7 @@ interceptions_df.columns = ['Rank', 'Player', 'Team', 'Interceptions', 'Goals', 
 contests_won_df.columns = ['Rank', 'Player', 'Team', 'Dribble Success Rate (%)', 'Goals', 'Minutes', 'Matches', 'Country']
 
 # Sélectionner uniquement les colonnes nécessaires pour chaque fichier
+player_goals_df = player_goals_df[['Player', 'Total Goals']]
 accurate_passes_df = accurate_passes_df[['Player', 'Pass Success (%)']]
 big_chances_created_df = big_chances_created_df[['Player', 'Big Chances Created']]
 interceptions_df = interceptions_df[['Player', 'Interceptions']]
@@ -36,6 +37,7 @@ contests_won_df = contests_won_df[['Player', 'Dribble Success Rate (%)']]
 player_stats_df = accurate_passes_df.merge(big_chances_created_df, on='Player', how='right')
 player_stats_df = player_stats_df.merge(interceptions_df, on='Player', how='right')
 player_stats_df = player_stats_df.merge(contests_won_df, on='Player', how='right')
+player_stats_df = player_stats_df.merge(player_goals_df, on='Player', how='right')
 
 # Streamlit app
 st.title("LaLiga Dashboard 2023/24")
@@ -112,6 +114,7 @@ elif page == "Player Statistics":
             'Big Chances Created',  # From player_big_chances_created.csv
             'Interceptions',  # From player_interceptions.csv
             'Dribble Success Rate (%)'  # From player_contests_won.csv
+            'Total Goals'
         ]
 
 
@@ -134,12 +137,10 @@ elif page == "Player Statistics":
                 name=player
             ))
 
-        # Mettre à jour la mise en page du graphique radar pour ne pas afficher de valeurs
         fig_radar.update_layout(
             polar=dict(
                 radialaxis=dict(
                     visible=False,  # Ne pas afficher les valeurs sur l'axe radial
-                    range=[0, 100]  # Plage statique pour les valeurs en pourcentage
                 ),
                 angularaxis=dict(
                     visible=True  # Afficher les labels des catégories
