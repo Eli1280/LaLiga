@@ -16,7 +16,7 @@ player_goals_df = pd.read_csv('player_goals_per_90.csv')
 
 # Load additional player stats for radar chart
 accurate_passes_df = pd.read_csv('data/player_accurate_passes.csv')
-big_chances_created_df = pd.read_csv('player_big_chances_created.csv')
+big_chances_created_df = pd.read_csv('data/player_big_chances_created.csv')
 interceptions_df = pd.read_csv('data/player_interceptions.csv')
 contests_won_df = pd.read_csv('data/player_contests_won.csv')
 
