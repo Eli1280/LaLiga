@@ -141,7 +141,6 @@ elif page == "Player Statistics":
         # Afficher le graphique radar dans Streamlit
         st.plotly_chart(fig_radar)
 
-    else:
-        st.write("Please select players to compare.")
+
     else:
         st.write("Select players to see their comparison.")
