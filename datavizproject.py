@@ -78,15 +78,15 @@ elif page == "Player Statistics":
     # Select players to compare
     selected_players = st.multiselect(
         "Select players to compare:",
-        options=player_goals_df['player'].unique(),
-        default=player_goals_df['player'].unique()[:2]  # Pre-select the first two players
+        options=player_goals_df['Player'].unique(),
+        default=player_goals_df['Player'].unique()[:2]  # Pre-select the first two players
     )
 
     if selected_players:
-        filtered_df = player_goals_df[player_goals_df['player'].isin(selected_players)]
+        filtered_df = player_goals_df[player_goals_df['Player'].isin(selected_players)]
         fig_players = px.bar(filtered_df, x='player', y='goals_per_90',
                              title='Goals Per 90 Minutes Comparison',
-                             labels={'goals_per_90': 'Goals Per 90 Minutes', 'player': 'Player'})
+                             labels={'goals_per_90': 'Goals Per 90 Minutes', 'Player': 'Player'})
         st.plotly_chart(fig_players)
     else:
         st.write("Select players to see their comparison.")
