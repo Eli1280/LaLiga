@@ -9,7 +9,7 @@ Original file is located at
 
 import streamlit as st
 import pandas as pd
-import plotly.express as px
+
 
 # Load the CSV files
 home_table_df = pd.read_csv('/mnt/data/Laliga_table_home_2023_24.csv')
