@@ -22,7 +22,7 @@ contests_won_df = pd.read_csv('data/player_contests_won.csv')
 
 # Renommer les colonnes si nécessaire et sélectionner les données importantes
 accurate_passes_df.columns = ['Rank', 'Player', 'Team', 'Pass Success (%)', 'Total Passes', 'Minutes', 'Matches', 'Country']
-big_chances_created_df.columns = ['Rank', 'Player', 'Team', 'Big Chances Created', 'Goals', 'Minutes', 'Matches', 'Country']
+big_chances_created_df.columns = ['Rank', 'Player', 'Team', 'Chances Created', 'Goals', 'Minutes', 'Matches', 'Country']
 interceptions_df.columns = ['Rank', 'Player', 'Team', 'Goals', 'Interceptions', 'Matches', 'Minutes', 'Country']
 contests_won_df.columns = ['Rank', 'Player', 'Team', 'Goals', 'Dribble Success Rate (%)',  'Minutes', 'Matches', 'Country']
 player_goals_df.columns = ['Rank', 'Player', 'Team', 'Goals', 'Total Goals', 'Minutes', 'Matches', 'Country']
@@ -30,7 +30,7 @@ player_goals_df.columns = ['Rank', 'Player', 'Team', 'Goals', 'Total Goals', 'Mi
 # Sélectionner uniquement les colonnes nécessaires pour chaque fichier
 player_goals_df = player_goals_df[['Player', 'Total Goals']]
 accurate_passes_df = accurate_passes_df[['Player', 'Pass Success (%)']]
-big_chances_created_df = big_chances_created_df[['Player', 'Big Chances Created']]
+big_chances_created_df = big_chances_created_df[['Player', 'Chances Created']]
 interceptions_df = interceptions_df[['Player', 'Interceptions']]
 contests_won_df = contests_won_df[['Player', 'Dribble Success Rate (%)']]
 
@@ -103,7 +103,7 @@ elif page == "Player Statistics":
         # Filter data for selected players
         filtered_stats = player_stats_df[player_stats_df['Player'].isin(selected_players)]
         st.subheader("Player Statistics Table")
-        player_stats_display = filtered_stats[['Player', 'Pass Success (%)', 'Big Chances Created', 'Interceptions', 'Dribble Success Rate (%)','Total Goals']].reset_index(drop=True)
+        player_stats_display = filtered_stats[['Player', 'Pass Success (%)', 'Chances Created', 'Interceptions', 'Dribble Success Rate (%)','Total Goals']].reset_index(drop=True)
         st.dataframe(player_stats_display.reset_index(drop=True),use_container_width=True)
 
         # Radar chart for detailed comparison
@@ -121,7 +121,7 @@ elif page == "Player Statistics":
 
         scales = {
             'Pass Success (%)': [0, 100],  # Pourcentage, donc de 0 à 100
-            'Big Chances Created': [0, filtered_stats['Big Chances Created'].max() + 1],
+            'Big Chances Created': [0, filtered_stats['Chances Created'].max() + 1],
             'Interceptions': [0, filtered_stats['Interceptions'].max() + 1],
             'Dribble Success Rate (%)': [0, 100]
         }
