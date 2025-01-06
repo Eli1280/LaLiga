@@ -5,26 +5,7 @@ import plotly.graph_objects as go
 from dataframes import load_dataframes
 import os
 
-# Charger tous les fichiers CSV dans le dossier 'data'
-folder_path = 'data/'
-csv_files = [file for file in os.listdir(folder_path) if file.endswith('.csv') and 'player' in file.lower()]
 
-# Charger les CSV avec séparation des colonnes par des virgules
-player_csvs = []
-for file in csv_files:
-    df = pd.read_csv(os.path.join(folder_path, file), sep=',')
-    player_csvs.append(df)
-
-# Fusionner les DataFrames sur la colonne 'Player'
-if player_csvs:
-    merged_player_df = player_csvs[0]
-    for i, df in enumerate(player_csvs[1:], start=1):
-        # Renommer les colonnes pour éviter les conflits
-        df = df.rename(columns=lambda x: f"{x}_df{i}" if x != 'Player' else x)
-        merged_player_df = pd.merge(merged_player_df, df, on='Player', how='outer')  # Fusionner
-
-    # Afficher les résultats fusionnés
-    st.write(merged_player_df)
 
 # Streamlit app
 st.title("LaLiga Dashboard 2023/24")
