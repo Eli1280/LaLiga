@@ -23,9 +23,9 @@ contests_won_df = pd.read_csv('data/player_contests_won.csv')
 # Renommer les colonnes si nécessaire et sélectionner les données importantes
 accurate_passes_df.columns = ['Rank', 'Player', 'Team', 'Pass Success (%)', 'Total Passes', 'Minutes', 'Matches', 'Country']
 big_chances_created_df.columns = ['Rank', 'Player', 'Team', 'Big Chances Created', 'Goals', 'Minutes', 'Matches', 'Country']
-interceptions_df.columns = ['Rank', 'Player', 'Team', 'Interceptions', 'Goals', 'Minutes', 'Matches', 'Country']
-contests_won_df.columns = ['Rank', 'Player', 'Team', 'Dribble Success Rate (%)', 'Goals', 'Minutes', 'Matches', 'Country']
-player_goals_df.columns = ['Rank', 'Player', 'Team', 'Total Goals', 'Goals', 'Minutes', 'Matches', 'Country']
+interceptions_df.columns = ['Rank', 'Player', 'Team','Goals', 'Interceptions', 'Matches', 'Country']
+contests_won_df.columns = ['Rank', 'Player', 'Team', 'Goals', 'Dribble Success Rate (%)',  'Minutes', 'Matches', 'Country']
+player_goals_df.columns = ['Rank', 'Player', 'Team', 'Goals', 'Total Goals', 'Matches', 'Country']
 
 # Sélectionner uniquement les colonnes nécessaires pour chaque fichier
 player_goals_df = player_goals_df[['Player', 'Total Goals']]
