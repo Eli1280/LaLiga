@@ -15,10 +15,10 @@ team_tackles_df = pd.read_csv('won_tackle_team.csv', sep=',')
 player_goals_df = pd.read_csv('player_goals_per_90.csv', sep=',')
 
 # Load additional player stats for radar chart
-accurate_passes_df = pd.read_csv('data/player_accurate_passes.csv',sep=',')
-big_chances_created_df = pd.read_csv('data/player_big_chances_created.csv',sep=',')
-interceptions_df = pd.read_csv('data/player_interceptions.csv',sep=',')
-contests_won_df = pd.read_csv('data/player_contests_won.csv',sep=',')
+accurate_passes_df = pd.read_csv('data/player_accurate_passes.csv')
+big_chances_created_df = pd.read_csv('data/player_big_chances_created.csv')
+interceptions_df = pd.read_csv('data/player_interceptions.csv')
+contests_won_df = pd.read_csv('data/player_contests_won.csv')
 
 # Renommer les colonnes si nécessaire et sélectionner les données importantes
 accurate_passes_df.columns = ['Rank', 'Player', 'Team', 'Pass Success (%)', 'Total Passes', 'Minutes', 'Matches', 'Country']
