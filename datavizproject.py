@@ -15,11 +15,11 @@ for file in csv_files:
     df = pd.read_csv(os.path.join(folder_path, file))
     player_csvs.append(df)
 
-# Fusionner les DataFrames sur la colonne 'Player'
+# Fusionner les DataFrames sur la colonne 'Player' avec des suffixes pour éviter les collisions
 if player_csvs:
     merged_player_df = player_csvs[0]
     for df in player_csvs[1:]:
-        merged_player_df = pd.merge(merged_player_df, df, on='Player', how='outer')  # Outer join
+        merged_player_df = pd.merge(merged_player_df, df, on='Player', how='outer', suffixes=('_left', '_right'))  # Utiliser des suffixes
 
     # Afficher les résultats fusionnés
     st.write(merged_player_df)
