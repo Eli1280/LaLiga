@@ -15,12 +15,24 @@ team_tackles_df = pd.read_csv('won_tackle_team.csv', sep=',')
 player_goals_df = pd.read_csv('player_goals_per_90.csv', sep=',')
 
 # Load additional player stats for radar chart
-accurate_passes_df = pd.read_csv('data/player_accurate_passes.csv', sep=',')
-big_chances_created_df = pd.read_csv('data/player_big_chances_created.csv', sep=',')
-interceptions_df = pd.read_csv('data/player_interceptions.csv', sep=',')
-contests_won_df = pd.read_csv('data/player_contests_won.csv', sep=',')
+accurate_passes_df = load_csv_file('data/player_accurate_passes.csv')
+big_chances_created_df = load_csv_file('player_big_chances_created.csv')
+interceptions_df = load_csv_file('data/player_interceptions.csv')
+contests_won_df = load_csv_file('data/player_contests_won.csv')
 
-# Merge all player data into a single DataFrame
+# Renommer les colonnes si nécessaire et sélectionner les données importantes
+accurate_passes_df.columns = ['Rank', 'Player', 'Team', 'Accurate Passes', 'Total Passes', 'Minutes', 'Matches', 'Country']
+big_chances_created_df.columns = ['Rank', 'Player', 'Team', 'Big Chances Created', 'Goals', 'Minutes', 'Matches', 'Country']
+interceptions_df.columns = ['Rank', 'Player', 'Team', 'Interceptions', 'Goals', 'Minutes', 'Matches', 'Country']
+contests_won_df.columns = ['Rank', 'Player', 'Team', 'Contests Won', 'Goals', 'Minutes', 'Matches', 'Country']
+
+# Sélectionner uniquement les colonnes nécessaires pour chaque fichier
+accurate_passes_df = accurate_passes_df[['Player', 'Accurate Passes']]
+big_chances_created_df = big_chances_created_df[['Player', 'Big Chances Created']]
+interceptions_df = interceptions_df[['Player', 'Interceptions']]
+contests_won_df = contests_won_df[['Player', 'Contests Won']]
+
+# Fusionner les DataFrames sur la colonne 'Player'
 player_stats_df = accurate_passes_df.merge(big_chances_created_df, on='Player', how='left')
 player_stats_df = player_stats_df.merge(interceptions_df, on='Player', how='left')
 player_stats_df = player_stats_df.merge(contests_won_df, on='Player', how='left')
