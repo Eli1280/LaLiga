@@ -9,6 +9,8 @@ Original file is located at
 import plotly.express as px
 import streamlit as st
 import pandas as pd
+import plotly.graph_objects as go
+from dataframes import load_dataframes
 
 
 # Load the CSV files
@@ -68,6 +70,46 @@ elif page == "Team Statistics":
     st.plotly_chart(fig_tackles)
 
 # Page: Player Statistics
+selected_datasets = st.multiselect(
+    "Sélectionnez les DataFrames à utiliser:",
+    options=list(dataframes.keys()),
+    default=list(dataframes.keys())[:2]
+)
+
+# Sélectionner les joueurs à comparer
+selected_players = st.multiselect(
+    "Sélectionnez les joueurs à comparer:",
+    options=dataframes['Goals per Match']['Player'].unique(),
+    default=dataframes['Goals per Match']['Player'].unique()[:2]
+)
+
+# Filtrer les données des joueurs sélectionnés
+filtered_dfs = {}
+for dataset in selected_datasets:
+    filtered_dfs[dataset] = dataframes[dataset][dataframes[dataset]['Player'].isin(selected_players)]
+
+# Exemple de comparaison avec un radar chart pour un DataFrame (par exemple 'Goals per Match')
+if 'Goals per Match' in selected_datasets:
+    df_goals = filtered_dfs['Goals per Match']
+    fig = go.Figure()
+
+    for player in selected_players:
+        player_data = df_goals[df_goals['Player'] == player].iloc[0]
+        fig.add_trace(go.Scatterpolar(
+            r=[player_data['Goals per Match'], player_data['Total Goals Scored'], player_data['Matches']],
+            theta=['Goals per Match', 'Total Goals Scored', 'Matches'],
+            fill='toself',
+            name=player
+        ))
+
+    fig.update_layout(
+        polar=dict(
+            radialaxis=dict(visible=True, range=[0, max(df_goals['Goals per Match'].max(), df_goals['Total Goals Scored'].max(), df_goals['Matches'].max())])
+        ),
+        showlegend=True,
+        title='Comparaison des Joueurs'
+    )
+    st.plotly_chart(fig)
 elif page == "Player Statistics":
     st.header("Player Statistics")
     st.write("Compare performance of players in LaLiga.")
