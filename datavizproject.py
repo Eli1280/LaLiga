@@ -96,8 +96,12 @@ elif page == "Player Statistics":
     )
 
     if selected_players:
+        
         # Filter data for selected players
         filtered_stats = player_stats_df[player_stats_df['Player'].isin(selected_players)]
+        st.subheader("Player Statistics Table")
+        player_stats_display = filtered_stats[['Player', 'Pass Success (%)', 'Big Chances Created', 'Interceptions', 'Dribble Success Rate (%)']]
+        st.dataframe(player_stats_display)
 
         # Radar chart for detailed comparison
         st.subheader("Radar Chart Comparison")
@@ -130,31 +134,19 @@ elif page == "Player Statistics":
                 name=player
             ))
 
-        # Mettre à jour la mise en page du graphique radar avec des axes radiaux distincts
+        # Mettre à jour la mise en page du graphique radar pour ne pas afficher de valeurs
         fig_radar.update_layout(
             polar=dict(
                 radialaxis=dict(
-                    visible=True,
-                    range=[scales[radar_categories[0]][0], scales[radar_categories[0]][1]],
+                    visible=False,  # Ne pas afficher les valeurs sur l'axe radial
+                    range=[0, 100]  # Plage statique pour les valeurs en pourcentage
                 ),
                 angularaxis=dict(
-                    tickmode='array',
-                    tickvals=[0, 90, 180, 270],  # Répartition des axes
-                    ticktext=radar_categories,
+                    visible=True  # Afficher les labels des catégories
                 ),
             ),
             showlegend=True
         )
-
-        # Mise à jour de chaque axe radial
-        for idx, category in enumerate(radar_categories):
-            fig_radar.update_layout(
-                polar=dict(
-                    radialaxis=dict(
-                        range=scales[category]
-                    )
-                )
-            )
         # Afficher le graphique radar dans Streamlit
         st.plotly_chart(fig_radar)
     else:
