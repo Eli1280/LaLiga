@@ -19,7 +19,7 @@ for file in csv_files:
 merged_player_df = pd.concat(player_csvs, axis=0, ignore_index=True)
 
 # Afficher la première colonne du DataFrame fusionné
-st.write(merged_player_df.iloc[:, 0])
+st.write(merged_player_df.head())
 
 # Streamlit app
 st.title("LaLiga Dashboard 2023/24")
