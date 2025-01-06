@@ -112,7 +112,7 @@ elif page == "Player Statistics":
         # Define the categories for the radar chart based on imported CSVs
         radar_categories = [
             'Pass Success (%)',  # From player_accurate_passes.csv
-            'Big Chances Created',  # From player_big_chances_created.csv
+            'Chances Created',  # From player_big_chances_created.csv
             'Interceptions',  # From player_interceptions.csv
             'Dribble Success Rate (%)',  # From player_contests_won.csv
             'Total Goals'
@@ -121,7 +121,7 @@ elif page == "Player Statistics":
 
         scales = {
             'Pass Success (%)': [0, 100],  # Pourcentage, donc de 0 à 100
-            'Big Chances Created': [0, filtered_stats['Chances Created'].max() + 1],
+            'Chances Created': [0, filtered_stats['Chances Created'].max() + 1],
             'Interceptions': [0, filtered_stats['Interceptions'].max() + 1],
             'Dribble Success Rate (%)': [0, 100]
         }
